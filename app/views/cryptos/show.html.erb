@@ -1,0 +1,22 @@
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title"><%= @crypto.symbol.upcase %></h5>
+  </div>
+
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">
+      <strong>Buy Price: </strong> <%= @crypto.cost_per %>
+    </li>
+    <li class="list-group-item">
+      <strong>Amount Owned: </strong> <%= @crypto.amount_owned %>
+    </li>
+  </ul>
+
+  <div class="card-footer">
+    <div class="row row-cols-lg-auto g-3 align-items-center">
+    <%= link_to "Back", cryptos_path, class: 'btn btn-light btn-sm' %>
+    <%= link_to "Edit", edit_crypto_path(@crypto), class: 'btn btn-light btn-sm' %>
+    <%= button_to "Delete coin", @crypto, method: :delete, class: 'btn btn-outline-danger btn-sm' %>
+    </div>
+  </div>
+</div>

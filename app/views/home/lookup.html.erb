@@ -1,0 +1,21 @@
+<h3>Look Up A Single Crypto Currency</h3>
+
+<%= form_tag home_lookup_path, :method => 'POST', data: {turbo: false} do %>
+  <%= text_field_tag 'sym', nil, placeholder: 'Enter Crypto Symbol', size: 50 %>
+  <%= submit_tag 'Lookup Stock Quote' %>
+<% end %>
+
+
+
+<% if @symbol && @info %>
+<div>
+<%= @symbol %>
+<br/>
+<%= @info['symbol'] %>: <%= @info['symbol'] %>:
+<br/>
+<%= @info['quote']['USD']['price'] %>
+<!--
+  -->
+  <pre style='white-space: pre-wrap;'><%= @info %></pre>
+</div>
+<% end %>

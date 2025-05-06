@@ -1,0 +1,42 @@
+<h3 class="mb-5">Portfolio Listing</h3>
+
+<div class="float-end pb-2">
+  <%= link_to "Add coin", new_crypto_path, class: 'btn btn-outline-secondary' %>
+</div>
+
+<table class="table table-bordered table-striped table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Coin</th>
+      <th scope="col">Current Price</th>
+
+      <th scope="col">1h %</th>
+      <th scope="col">21h %</th>
+      <th scope="col">7d %</th>
+
+      <th scope="col">Total Value</th>
+      <th scope="col">Profit/Loss</th>
+      <th scope="col">Buy Price</th>
+      <th scope="col">Amount</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @portfolio_list.each do |c| %>
+    <tr>
+      <td><%= link_to coin_title(c[:symbol], c[:name]), crypto_path(c[:id]) %></td>
+      <td>$ <%= c[:price].round(4) %></td>
+
+      <td><%= (c[:percent_change_1h] * 100).round(2) %></td>
+      <td><%= (c[:percent_change_24h] * 100).round(2) %></td>
+      <td><%= (c[:percent_change_7d] * 100).round(2) %></td>
+
+      <td>$ <%= (c[:price].to_d * c[:amount_owned]).round(2) %></td>
+      <td>$ <%= calculate_profit(c[:price].to_d, c[:cost_per], c[:amount_owned]).round(2) %></td>
+      <td><%= c[:cost_per] %></td>
+      <td><%= c[:amount_owned] %></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<strong>Portfolio Profit/Loss: </strong><%= number_to_currency(portfolio_profit(@portfolio_list)) %>
